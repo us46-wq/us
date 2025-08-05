@@ -35,30 +35,23 @@
 </head>
 <body>
 
-  Avani &nbsp; <span class="heart">❤️</span> &nbsp; Ashish
+  Avani &nbsp; <span class="heart">❤️</span> &nbsp; Ashish
 
-  <audio id="myAudio" src="background_song.mp3" loop></audio>
+  <audio id="myAudio" src="background_song.mp3" loop></audio>
 
-  <script>
-    // Get the audio element
-    var audio = document.getElementById('myAudio');
+  <script>
+    // Get the audio element
+    var audio = document.getElementById('myAudio');
 
-    // Check if the password was correct
-    if (password === "234746") {
-      // Since the user has interacted with the password prompt,
-      // we can now play the audio
-      var playPromise = audio.play();
-
-      // A promise is still returned by the browser, so we handle it gracefully
-      if (playPromise !== undefined) {
-        playPromise.then(function() {
-          // Autoplay started successfully
-        }).catch(function(error) {
-          console.log("Autoplay was prevented. User needs to interact with the page to play the music.");
-        });
-      }
-    }
-  </script>
+    // Check if the password was correct. If so, play the audio.
+    if (password === "234746") {
+        audio.play().then(() => {
+            console.log("Autoplay started successfully.");
+        }).catch(error => {
+            console.log("Autoplay was prevented.", error);
+        });
+    }
+  </script>
 
 </body>
 </html>
