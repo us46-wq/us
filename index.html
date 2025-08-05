@@ -1,83 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Private Love Page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-    var password = prompt("Enter password to view:");
-    if (password !== "234746") {
-      document.write("❌ Access Denied.");
-      throw new Error("Blocked");
-    }
-  </script>
-  <style>
-    body {
-      font-family: cursive;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-size: 2em;
-      text-align: center;
-    }
-    .heart {
-      color: red;
-      animation: beat 1s infinite;
-    }
-    @keyframes beat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-  </style>
+  <title>Private Love Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    var password = prompt("Enter password to view:");
+    if (password !== "234746") {
+      document.write("❌ Access Denied.");
+      throw new Error("Blocked");
+    }
+  </script>
+  <style>
+    body {
+      font-family: cursive;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 2em;
+      text-align: center;
+    }
+    .heart {
+      color: red;
+      animation: beat 1s infinite;
+    }
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+  </style>
 </head>
 <body>
 
-  Avani &nbsp; <span class="heart">❤️</span> &nbsp; Ashish
+  Avani &nbsp; <span class="heart">❤️</span> &nbsp; Ashish
 
-  <audio id="myAudio" src="background_song.mp3" loop autoplay></audio>
+  <audio id="myAudio" src="background_song.mp3" loop></audio>
 
-  <script>
-    window.onload = function() {
-      // Get the audio element
-      var audio = document.getElementById('myAudio');
+  <script>
+    // Get the audio element
+    var audio = document.getElementById('myAudio');
 
-      // Attempt to play the audio
-      var playPromise = audio.play();
+    // Check if the password was correct
+    if (password === "234746") {
+      // Since the user has interacted with the password prompt,
+      // we can now play the audio
+      var playPromise = audio.play();
 
-      // Check if the play promise was successful
-      if (playPromise !== undefined) {
-        playPromise.then(function() {
-          // Autoplay started successfully
-        }).catch(function(error) {
-          // Autoplay was prevented.
-          // This is a common issue on many browsers.
-          // You can add a button for the user to click to start the music.
-          console.log("Autoplay was prevented. User needs to interact with the page to play the music.");
-
-          // Create a button to play the music on user click
-          var playButton = document.createElement('button');
-          playButton.textContent = 'Play Music';
-          playButton.style.position = 'absolute';
-          playButton.style.bottom = '20px';
-          playButton.style.padding = '10px 20px';
-          playButton.style.fontSize = '1em';
-          playButton.style.cursor = 'pointer';
-          playButton.style.backgroundColor = '#ff6b6b';
-          playButton.style.border = 'none';
-          playButton.style.borderRadius = '5px';
-          playButton.style.color = 'white';
-          playButton.onclick = function() {
-            audio.play();
-            playButton.style.display = 'none'; // Hide the button once clicked
-          };
-          document.body.appendChild(playButton);
-        });
-      }
-    };
-  </script>
+      // A promise is still returned by the browser, so we handle it gracefully
+      if (playPromise !== undefined) {
+        playPromise.then(function() {
+          // Autoplay started successfully
+        }).catch(function(error) {
+          console.log("Autoplay was prevented. User needs to interact with the page to play the music.");
+        });
+      }
+    }
+  </script>
 
 </body>
 </html>
